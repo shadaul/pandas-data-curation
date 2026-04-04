@@ -1,5 +1,14 @@
 import pandas as pd
 from pathlib import Path
+import logging
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    filename="pipeline.log",
+    filemode="a"
+)
+
 
 input_dir = Path("data_input")
 output_dir = Path("data_output")
@@ -7,20 +16,25 @@ output_dir = Path("data_output")
 output_dir.mkdir(exist_ok=True)
 
 files = input_dir.glob("*.json")
+logging.warning("it is warning info")
 
 for file_path in files:
-    print("woring with: ", file_path.name)
+    logging.info(f"working with: {file_path.name} " )
 
-    df = pd.read_json(file_path)
+    try:
+        df = pd.read_json(file_path)
 
-    df["status"] = df["status"].fillna("offline")
-    df = df[df["status"] =="active"]
+        df["status"] = df["status"].fillna("offline")
+        df = df[df["status"] =="active"]
 
-    output_file = output_dir / f"clean {file_path.name}"
+        output_file = output_dir / f"clean {file_path.name}"
 
 
-    df.to_json(output_file, orient="records", indent=4)
-    print("saved in:", output_file)
+        df.to_json(output_file, orient="records", indent=4)
+        logging.info(f"saved in: {output_file}" )
+
+    except Exception as e:
+        logging.error(f"this file has error: {file_path}. Details: {e}")
 
 
 
