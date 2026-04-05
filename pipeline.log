@@ -5,3 +5,26 @@
 2026-04-04 11:51:43,327 - INFO - saved in: data_output\clean raw_data.json
 2026-04-04 11:51:43,327 - INFO - working with: raw_data2.json 
 2026-04-04 11:51:43,331 - INFO - saved in: data_output\clean raw_data2.json
+2026-04-05 07:39:31,378 - WARNING - it is warning info
+2026-04-05 07:39:31,379 - INFO - working with: bad_data.json 
+2026-04-05 07:39:31,380 - ERROR - this file has error: data_input\bad_data.json. Details: Expected object or value
+2026-04-05 07:39:31,380 - INFO - working with: raw_data.json 
+2026-04-05 07:39:31,418 - INFO - saved in: data_output\clean raw_data.json
+2026-04-05 07:39:31,418 - INFO - working with: raw_data2.json 
+2026-04-05 07:39:31,427 - INFO - saved in: data_output\clean raw_data2.json
+2026-04-05 07:42:17,001 - WARNING - it is warning info
+2026-04-05 07:42:17,001 - INFO - working with: bad_data.json 
+2026-04-05 07:42:17,003 - ERROR - this file has error: data_input\bad_data.json. Details: Expected object or value
+2026-04-05 07:42:17,003 - INFO - working with: raw_data.json 
+2026-04-05 07:42:17,020 - INFO - saved to database table 'active_logs'
+2026-04-05 07:42:17,020 - INFO - working with: raw_data2.json 
+2026-04-05 07:42:17,027 - INFO - saved to database table 'active_logs'
+2026-04-05 08:00:28,477 - WARNING - it is warning info
+2026-04-05 08:00:28,477 - INFO - working with: bad_data.json 
+2026-04-05 08:00:28,478 - ERROR - this file has error: data_input\bad_data.json. Details: Expected object or value
+2026-04-05 08:00:28,478 - INFO - working with: raw_data.json 
+2026-04-05 08:00:28,492 - INFO - saved to database table 'active_logs'
+2026-04-05 08:00:28,493 - INFO - saved to archive data_archive\raw_data.json
+2026-04-05 08:00:28,493 - INFO - working with: raw_data2.json 
+2026-04-05 08:00:28,499 - INFO - saved to database table 'active_logs'
+2026-04-05 08:00:28,499 - INFO - saved to archive data_archive\raw_data2.json
