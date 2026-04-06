@@ -1,19 +1,21 @@
 # Automated Data Curation & ETL Pipeline
 
-This repository contains a robust Data Engineering pipeline for batch processing, cleaning, and loading JSON logs into a relational database.
+This repository contains a robust Data Engineering pipeline for batch processing, flattening nested JSON logs from a REST API, and loading them into a relational database.
 
 ## Architecture & Features
 
-* **ETL Process:** Extracts raw JSON logs, transforms them using Pandas, and loads the clean data into an SQLite database (`company_logs.db`).
-* **Cold Storage (Idempotency):** Successfully processed files are automatically moved from `data_input` to `data_archive` to prevent duplicate processing on subsequent runs.
-* **Fault Tolerance:** Implements strict `try-except` blocks. If a corrupted file is encountered, the script logs the error and continues processing the rest of the batch without crashing.
-* **System Logging:** Uses Python's built-in `logging` module to maintain a persistent audit trail (`pipeline.log`) tracking system operations, warnings, and error details.
-* **Data Cleansing:** Handles missing data (fills `NaN` statuses with 'offline') and filters datasets to retain only 'active' records.
+* **Orchestration:** Utilizes a master script (`main.py`) with the `subprocess` module to manage the execution flow of the entire ETL process.
+* **Data Extraction (API):** Automatically fetches raw user data from an external REST API using the `requests` library and lands it into a local Landing Zone (`data_input`).
+* **Data Transformation:** Leverages `pandas` to flatten nested JSON structures (e.g., extracting cities from nested address dictionaries) and performs strict column projection to remove unnecessary data.
+* **Database Loading:** Safely ingests the cleaned, flat datasets into an SQLite relational database (`users` table) for downstream analytics.
+* **Cold Storage (Idempotency):** Successfully processed files are automatically moved to a `data_archive` directory to prevent duplicate processing on subsequent runs.
+* **Fault Tolerance & Logging:** Implements strict `try-except` blocks. If a corrupted file or schema drift is encountered, the script logs the error details to `pipeline.log` and continues processing the rest of the batch without crashing.
 
 ## Technologies Used
 
 * **Python 3**
-* **Pandas** (Data transformation)
+* **Pandas** (Data transformation & flattening)
+* **Requests** (REST API integration)
 * **SQLite3** (Relational database management)
-* **Pathlib** (Object-oriented filesystem paths)
+* **Subprocess & Pathlib** (Pipeline orchestration & filesystem management)
 * **Logging** (System audit and error tracking)

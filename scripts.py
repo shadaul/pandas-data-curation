@@ -31,15 +31,18 @@ for file_path in files:
     try:
         df = pd.read_json(file_path)
 
-        df["status"] = df["status"].fillna("offline")
-        df = df[df["status"] =="active"]
+        # df["status"] = df["status"].fillna("offline")
+        # df = df[df["status"] =="active"]
+        df["city"] = df["address"].str["city"]
+        df = df[["id", "name", "email", "city"]]
+        # print(df.head())
 
         output_file = output_dir / f"clean {file_path.name}"
 
 
         # df.to_json(output_file, orient="records", indent=4)
-        df.to_sql("active_logs", conn, if_exists="append", index=False)
-        logging.info(f"saved to database table 'active_logs'" )
+        df.to_sql("users", conn, if_exists="append", index=False)
+        logging.info(f"saved to database table 'users'" )
 
         target_path = archive_dir / file_path.name
         file_path.rename(target_path)
