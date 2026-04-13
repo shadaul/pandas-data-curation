@@ -66,15 +66,27 @@ A = [1, 3, 1, 4, 2, 3, 5, 4]
 # answer = get_ready_time(X, A)
 # print(f"Все товары собраны на секунде: {answer}")
 
-def rotate_carousel(A, K):
-    if len(A) == 0:
-        return A
+# def rotate_carousel(A, K):
+#     if len(A) == 0:
+#         return A
     
-    K = K % len(A)
+#     K = K % len(A)
 
-    return A[-K:] + A[:-K]
+#     return A[-K:] + A[:-K]
 
-A = [3, 8, 9, 7, 6]
-K = 3
-b = rotate_carousel(A, K)
-print(b)
+# A = [3, 8, 9, 7, 6]
+# K = 3
+# b = rotate_carousel(A, K)
+# print(b)
+
+def find_unpaired(A):
+    pairs = set()
+    for item in A:
+        if item not in pairs:
+            pairs.add(item)
+        else:
+            pairs.remove(item)
+    return pairs.pop()
+
+A = [9, 3, 9, 3, 9, 7, 9]
+print("Потерянный ботинок:", find_unpaired(A))
