@@ -36,10 +36,45 @@ promo_ids_2 = [1, 2, 3]
 promo_ids_3 = [-1, -3]
 # Твой код должен вернуть: 1 (потому что 1 — это самое маленькое положительное число, а в списке его нет)
 
-unique_ids = set(promo_ids_3)
+# unique_ids = set(promo_ids_3)
 
-target = 1
-while target in unique_ids:
-   target += 1
+# target = 1
+# while target in unique_ids:
+#    target += 1
 
-print(target)
+# print(target)
+
+
+X = 5 # Нам нужны товары 1, 2, 3, 4, 5
+# Массив A: индекс — это секунда, значение — это ID товара, который приехал
+A = [1, 3, 1, 4, 2, 3, 5, 4]
+
+# Ожидаемый ответ: 6
+# (Именно на 6-й секунде приезжает товар №5, и у нас есть полный комплект 1,2,3,4,5)
+
+# def get_ready_time(X, A):
+#     collected = set()
+    
+#     for second, item in enumerate(A):
+#         collected.add(item)  
+        
+#         if len(collected) == X:  
+#             return second        
+            
+#     return -1
+
+# answer = get_ready_time(X, A)
+# print(f"Все товары собраны на секунде: {answer}")
+
+def rotate_carousel(A, K):
+    if len(A) == 0:
+        return A
+    
+    K = K % len(A)
+
+    return A[-K:] + A[:-K]
+
+A = [3, 8, 9, 7, 6]
+K = 3
+b = rotate_carousel(A, K)
+print(b)
