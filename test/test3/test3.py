@@ -128,20 +128,75 @@ S = "{[()()]}"
 S = "([)()]"
 # Результат: False (Круглая скобка открылась, но внутри нее попыталась закрыться квадратная - это ошибка синтаксиса)
 
-def is_valid_config(S):
-    stack = []
-    matching_brackets = {')': '(', ']': '[', '}': '{'}
-    for item in S:
-        if item in "{[(":
-            stack.append(item)
+# def is_valid_config(S):
+#     stack = []
+#     matching_brackets = {')': '(', ']': '[', '}': '{'}
+#     for item in S:
+#         if item in "{[(":
+#             stack.append(item)
 
-        elif item in matching_brackets:
+#         elif item in matching_brackets:
             
         
-            if len(stack) == 0:
-                return False
+#             if len(stack) == 0:
+#                 return False
 
-            last_open = stack.pop()
-            if matching_brackets[item] != last_open:
-                return False
-    return len(stack) == 0
+#             last_open = stack.pop()
+#             if matching_brackets[item] != last_open:
+#                 return False
+#     return len(stack) == 0
+
+# A = [-3, 1, 2, -2, 5, 6]
+
+# def find_max_product(A):
+#     A.sort()
+#     option1 = A[-1] * A[-2] * A[-3]
+#     option2 = A[0] * A[1] * A[-1]
+#     return max(option1, option2)
+
+# b = find_max_product(A)
+# print(b)
+
+A = [9, 3, 9, 3, 9, 7, 9]
+
+# Как это выглядит:
+# Индексы 0 и 2: пара девяток (9, 9)
+# Индексы 1 и 3: пара троек (3, 3)
+# Индексы 4 и 6: пара девяток (9, 9)
+# Индекс 5: одинокая семерка (7). Ожидаемый результат: 7
+
+# def find_unpaired(A):
+#     count = {}
+#     for num in A:
+#         count[num] = count.get(num, 0) + 1
+#     return count
+
+# b = find_unpaired(A)
+# print(b)
+
+
+# def find_unpaired(A):
+#     result = 0
+#     for num in A:
+#         result ^=num
+#     return result
+
+# b = find_unpaired(A)
+# print(b)
+
+A = [23171, 21011, 21123, 21366, 21013, 21367]
+
+def get_max_profit(A):
+    min_price = float('inf')
+    max_profit = 0
+    for price in A:
+        if price < min_price:
+            min_price = price
+        current_profit = price - min_price
+        if current_profit > max_profit:
+            max_profit = current_profit
+
+    return max_profit
+
+b= get_max_profit(A)
+print(b) 
