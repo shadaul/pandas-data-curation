@@ -79,14 +79,69 @@ A = [1, 3, 1, 4, 2, 3, 5, 4]
 # b = rotate_carousel(A, K)
 # print(b)
 
-def find_unpaired(A):
-    pairs = set()
-    for item in A:
-        if item not in pairs:
-            pairs.add(item)
-        else:
-            pairs.remove(item)
-    return pairs.pop()
+# def find_unpaired(A):
+#     pairs = set()
+#     for item in A:
+#         if item not in pairs:
+#             pairs.add(item)
+#         else:
+#             pairs.remove(item)
+#     return pairs.pop()
 
-A = [9, 3, 9, 3, 9, 7, 9]
-print("Потерянный ботинок:", find_unpaired(A))
+# A = [9, 3, 9, 3, 9, 7, 9]
+# print("Потерянный ботинок:", find_unpaired(A))
+
+# A = [3, 1, 2, 4, 3]
+
+# def find_min_difference(A):
+#     total_weight = sum(A)
+#     left_weight = 0
+#     right_weight = total_weight
+#     min_diff = float('inf')
+#     for box in A[:-1]:
+#         left_weight += box
+#         right_weight -= box
+#         current_diff = abs(left_weight - right_weight)
+#         if current_diff < min_diff:
+#             min_diff = current_diff
+#     return min_diff
+
+# b = find_min_difference(A)
+# print(b)
+
+
+# A = [4, 1, 3, 2]
+
+# def is_ok(A):
+#     collection = set(A)
+#     if len(collection) != len(A):
+#         return False
+#     if max(collection) != len(A):
+#         return False
+#     return True
+
+# Пример 1: Идеальная конфигурация
+S = "{[()()]}"
+# Результат: True (Все открытые скобки закрыты в правильном порядке)
+
+# Пример 2: Сбой в системе
+S = "([)()]"
+# Результат: False (Круглая скобка открылась, но внутри нее попыталась закрыться квадратная - это ошибка синтаксиса)
+
+def is_valid_config(S):
+    stack = []
+    matching_brackets = {')': '(', ']': '[', '}': '{'}
+    for item in S:
+        if item in "{[(":
+            stack.append(item)
+
+        elif item in matching_brackets:
+            
+        
+            if len(stack) == 0:
+                return False
+
+            last_open = stack.pop()
+            if matching_brackets[item] != last_open:
+                return False
+    return len(stack) == 0
