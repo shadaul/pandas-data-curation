@@ -184,19 +184,26 @@ A = [9, 3, 9, 3, 9, 7, 9]
 # b = find_unpaired(A)
 # print(b)
 
-A = [23171, 21011, 21123, 21366, 21013, 21367]
+# A = [23171, 21011, 21123, 21366, 21013, 21367]
 
-def get_max_profit(A):
-    min_price = float('inf')
-    max_profit = 0
-    for price in A:
-        if price < min_price:
-            min_price = price
-        current_profit = price - min_price
-        if current_profit > max_profit:
-            max_profit = current_profit
+# def get_max_profit(A):
+#     min_price = float('inf')
+#     max_profit = 0
+#     for price in A:
+#         if price < min_price:
+#             min_price = price
+#         current_profit = price - min_price
+#         if current_profit > max_profit:
+#             max_profit = current_profit
 
-    return max_profit
+#     return max_profit
 
-b= get_max_profit(A)
-print(b) 
+# b= get_max_profit(A)
+# print(b) 
+
+def find_missing(A):
+    telo = set(A)
+    target = 1
+    while target in telo:
+        target += 1
+    return target
