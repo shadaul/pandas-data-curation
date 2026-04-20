@@ -106,25 +106,98 @@
 
 # print(get_total_spent(users, purchases))
 
-clicks = [
-    {"user_id": 1, "page": "Главная"},
-    {"user_id": 2, "page": "Каталог"},
-    {"user_id": 1, "page": "Корзина"},
-    {"user_id": 3, "page": "Главная"},
-    {"user_id": 2, "page": "Оплата"}
-]
+# clicks = [
+#     {"user_id": 1, "page": "Главная"},
+#     {"user_id": 2, "page": "Каталог"},
+#     {"user_id": 1, "page": "Корзина"},
+#     {"user_id": 3, "page": "Главная"},
+#     {"user_id": 2, "page": "Оплата"}
+# ]
 
-def group_clicks(logs):
-    my_dict = {}
-    for item in logs:
-        id = item["user_id"]
-        page = item["page"]
+# def group_clicks(logs):
+#     my_dict = {}
+#     for item in logs:
+#         id = item["user_id"]
+#         page = item["page"]
 
-        if id not in my_dict:
-            my_dict[id] = [page]
+#         if id not in my_dict:
+#             my_dict[id] = [page]
+#         else:
+#             my_dict[id].append(page)
+#     return my_dict
+
+
+# print(group_clicks(clicks))
+
+
+
+# def is_anagram(word1, word2):
+#     return sorted(word1) == sorted(word2)
+# from collections import Counter
+
+# def is_anagram(word1, word2):
+#     return Counter(word1) == Counter(word2)
+
+    
+# # def is_anagram(word1, word2):
+# #     if len(word1) != len(word2):
+# #         return False
+# #     dict1 = {}
+# #     dict2 = {}
+# #     for item in word1:
+# #         dict1[item] = dict1.get(item, 0) + 1
+# #     for i in word2:
+# #         dict2[i] = dict2.get(i, 0) + 1
+# #     return dict1 == dict2
+
+# print(is_anagram("listen", "silent")) # Должно вернуть True
+# print(is_anagram("triangle", "integral")) # Должно вернуть True
+# print(is_anagram("apple", "papel")) # Должно вернуть True
+# print(is_anagram("hello", "holla")) # Должно вернуть False
+
+
+# nums1 = [2, 7, 11, 15]
+# target1 = 9
+# # Ожидаемый результат: [0, 1] (Потому что nums1[0] + nums1[1] = 2 + 7 = 9)
+
+# nums2 = [3, 2, 4]
+# target2 = 6
+# # Ожидаемый результат: [1, 2] (Потому что 2 + 4 = 6)
+
+# nums3 = [3, 3]
+# target3 = 6
+# # Ожидаемый результат: [0, 1]
+
+# def two_sum(nums1):
+#     seen_numbers = {}
+#     for index, num in enumerate(nums1):
+#         diff = target1 - num
+#         if diff in seen_numbers:
+#             return [seen_numbers[diff], index]
+#         else:
+#             seen_numbers[num] = index
+
+# print(two_sum(nums1))
+
+
+def compress_string(text):
+    if not text:
+        return ""
+    count = 1
+    current_char = text[0]
+    result = ''
+    for letter in text[1:]:
+        if letter == current_char:
+            count += 1
         else:
-            my_dict[id].append(page)
-    return my_dict
+            result = result + letter + str(count)
+            current_char = letter
+            count = 1
 
+    result = result + letter + str(count)
+    return result
 
-print(group_clicks(clicks))
+print(compress_string("AAABBC"))   # Должно вернуть "A3B2C1"
+print(compress_string("XYZ"))      # Должно вернуть "X1Y1Z1"
+print(compress_string("AABBAA"))   # Должно вернуть "A2B2A2" (Внимательно: 'A' тут встречается дважды, но мы не суммируем их все вместе, мы считаем только те, что идут ПОДРЯД)
+

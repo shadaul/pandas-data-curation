@@ -35,17 +35,34 @@
 -- FROM mytable
 -- WHERE row_num = 1
 
-WITH time_machine AS (
+-- WITH time_machine AS (
 
-    SELECT 
-        client_id, 
-        visit_date, 
-        LAG(visit_date) OVER (PARTITION by client_id ORDER by visit_date ASC) as prev_visit
-    FROM visits
+--     SELECT 
+--         client_id, 
+--         visit_date, 
+--         LAG(visit_date) OVER (PARTITION by client_id ORDER by visit_date ASC) as prev_visit
+--     FROM visits
+-- )
+
+-- SELECT 
+--     client_id,
+--     visit_date,
+--     DATEDIFF(day, prev_visit, visit_date) as days_since_last
+-- FROM time_machine;
+
+-- SELECT client_id, sum(amount) as total_spent
+-- from orders
+-- GROUP by client_id
+-- HAVING sum(amount) > 600;
+
+WITH prev_purchase as (
+    SELECT
+        client_id,
+        purchase_date,
+        LAG(purchase_date) OVER (PARTITION by client_id order by purchase_date ASC) as prev_date
+    from purchases
 )
 
-SELECT 
-    client_id,
-    visit_date,
-    DATEDIFF(day, prev_visit, visit_date) as days_since_last
-FROM time_machine;
+SELECT DISTINCT client_id
+from prev_purchase
+where purchase_date - prev_date = 1
