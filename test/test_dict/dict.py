@@ -180,24 +180,94 @@
 # print(two_sum(nums1))
 
 
-def compress_string(text):
-    if not text:
-        return ""
-    count = 1
-    current_char = text[0]
-    result = ''
-    for letter in text[1:]:
-        if letter == current_char:
-            count += 1
-        else:
-            result = result + letter + str(count)
-            current_char = letter
-            count = 1
+# def compress_string(text):
+#     if not text:
+#         return ""
+#     count = 1
+#     current_char = text[0]
+#     result = ''
+#     for letter in text[1:]:
+#         if letter == current_char:
+#             count += 1
+#         else:
+#             result = result + letter + str(count)
+#             current_char = letter
+#             count = 1
 
-    result = result + letter + str(count)
-    return result
+#     result = result + letter + str(count)
+#     return result
 
-print(compress_string("AAABBC"))   # Должно вернуть "A3B2C1"
-print(compress_string("XYZ"))      # Должно вернуть "X1Y1Z1"
-print(compress_string("AABBAA"))   # Должно вернуть "A2B2A2" (Внимательно: 'A' тут встречается дважды, но мы не суммируем их все вместе, мы считаем только те, что идут ПОДРЯД)
+# print(compress_string("AAABBC"))   # Должно вернуть "A3B2C1"
+# print(compress_string("XYZ"))      # Должно вернуть "X1Y1Z1"
+# print(compress_string("AABBAA"))   # Должно вернуть "A2B2A2" (Внимательно: 'A' тут встречается дважды, но мы не суммируем их все вместе, мы считаем только те, что идут ПОДРЯД)
 
+# from collections import Counter
+# logs1 = [101, 101, 101, 202, 202, 303]
+# k1 = 2
+# # Ожидаемый результат: [101, 202] (Потому что 101 купили 3 раза, 202 купили 2 раза. Это топ-2).
+
+# logs2 = [777]
+# k2 = 1
+# # Ожидаемый результат: [777]
+
+# def top_k_products(logs, k):
+#     top_items = Counter(logs).most_common(k)
+
+#     result = []
+#     for item in top_items:
+#         result.append(item[0])
+
+#     return result
+
+# print(top_k_products(logs1, 2))
+
+
+
+# def is_valid(s):
+#     stack = []
+#     mapping = {")": "(", "]": "[", "}": "{"}
+#     for item in s:
+#         if item not in mapping:
+#             stack.append(item)
+
+#         elif item in mapping:
+
+#             if len(stack) == 0:
+#                 return False
+            
+#             top_element = stack.pop()
+#             if mapping[item] != top_element:
+#                 return False
+            
+#     return len(stack) == 0
+            
+# print(is_valid("()"))      # True (Всё четко)
+# print(is_valid("()[]{}"))  # True (Открыли-закрыли, всё по очереди)
+# print(is_valid("(]"))      # False (Открыли круглую, а закрыли квадратной — ошибка!)
+# print(is_valid("([)]"))    # False (Порядок нарушен: попытались закрыть круглую до того, как закрыли квадратную)
+# print(is_valid("{[]}"))    # True (Открыли фигурную, внутри открыли и закрыли квадратную, потом закрыли фигурную — идеально)
+
+
+print(longest_unique_substring("abcabcbb")) 
+# Должно вернуть 3. (Самая длинная уникальная часть — "abc", ее длина 3).
+
+print(longest_unique_substring("bbbbb"))    
+# Должно вернуть 1. (Уникальная часть только одна — "b").
+
+
+# Должно вернуть 3. (Подстрока "wke", длина 3. Обрати внимание, "pw" — это 2, а потом идет 'w' и всё ломает).
+
+def longest_unique_substring(s):
+    left = 0
+    max_length = 0
+    seen_chars = {}
+    for right, char in enumerate(s):
+        if char in seen_chars:
+            left = max(left, seen_chars[char] + 1)
+            seen_chars[char] = right
+            current_lenght = right - left + 1
+
+            max_length = max(max_length, current_lenght)
+    return max_length
+
+print(longest_unique_substring("pwwkew"))   
