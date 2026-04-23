@@ -274,9 +274,27 @@
 
 
 
-def is_palindrome(word):
-    return word == word[::-1] 
+# def is_palindrome(word):
+#     return word == word[::-1] 
 
-print(is_palindrome("radar")) # Должно вернуть True (радар = радар)
-print(is_palindrome("level")) # Должно вернуть True (левел = левел)
-print(is_palindrome("apple")) # Должно вернуть False (аппле != елппа)
+# print(is_palindrome("radar")) # Должно вернуть True (радар = радар)
+# print(is_palindrome("level")) # Должно вернуть True (левел = левел)
+# print(is_palindrome("apple")) # Должно вернуть False (аппле != елппа)
+
+
+
+def find_missing(nums):
+    n = len(nums)
+    ideal_num = n * (n + 1) // 2
+
+    return ideal_num - sum(nums)
+
+
+print(find_missing([3, 0, 1])) 
+# Должно вернуть 2. (Потому что массив длиной 3, значит числа должны быть 0, 1, 2, 3. Двойки не хватает).
+
+print(find_missing([0, 1, 2, 4, 5])) 
+# Должно вернуть 3.
+
+print(find_missing([1, 0])) 
+# Должно вернуть 2. (Массив длиной 2, числа должны быть 0, 1, 2. Двойки нет).

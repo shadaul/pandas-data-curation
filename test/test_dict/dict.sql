@@ -55,14 +55,24 @@
 -- GROUP by client_id
 -- HAVING sum(amount) > 600;
 
-WITH prev_purchase as (
-    SELECT
-        client_id,
-        purchase_date,
-        LAG(purchase_date) OVER (PARTITION by client_id order by purchase_date ASC) as prev_date
-    from purchases
-)
+-- WITH prev_purchase as (
+--     SELECT
+--         client_id,
+--         purchase_date,
+--         LAG(purchase_date) OVER (PARTITION by client_id order by purchase_date ASC) as prev_date
+--     from purchases
+-- )
 
-SELECT DISTINCT client_id
-from prev_purchase
-where purchase_date - prev_date = 1
+-- SELECT DISTINCT client_id
+-- from prev_purchase
+-- where purchase_date - prev_date = 1
+
+-- SELECT c.name, sum(t.amount)
+-- from clients c JOIN transactions t on c.client_id = t.client_id
+-- GROUP by c.name
+-- HAVING sum(amount) > 5000
+
+SELECT DISTINCT amount
+FROM transfers
+ORDER BY amount DESC
+LIMIT 1 OFFSET 1;
