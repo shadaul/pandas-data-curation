@@ -248,26 +248,35 @@
 # print(is_valid("{[]}"))    # True (Открыли фигурную, внутри открыли и закрыли квадратную, потом закрыли фигурную — идеально)
 
 
-print(longest_unique_substring("abcabcbb")) 
-# Должно вернуть 3. (Самая длинная уникальная часть — "abc", ее длина 3).
+# print(longest_unique_substring("abcabcbb")) 
+# # Должно вернуть 3. (Самая длинная уникальная часть — "abc", ее длина 3).
 
-print(longest_unique_substring("bbbbb"))    
-# Должно вернуть 1. (Уникальная часть только одна — "b").
+# print(longest_unique_substring("bbbbb"))    
+# # Должно вернуть 1. (Уникальная часть только одна — "b").
 
 
 # Должно вернуть 3. (Подстрока "wke", длина 3. Обрати внимание, "pw" — это 2, а потом идет 'w' и всё ломает).
 
-def longest_unique_substring(s):
-    left = 0
-    max_length = 0
-    seen_chars = {}
-    for right, char in enumerate(s):
-        if char in seen_chars:
-            left = max(left, seen_chars[char] + 1)
-            seen_chars[char] = right
-            current_lenght = right - left + 1
+# def longest_unique_substring(s):
+#     left = 0
+#     max_length = 0
+#     seen_chars = {}
+#     for right, char in enumerate(s):
+#         if char in seen_chars:
+#             left = max(left, seen_chars[char] + 1)
+#             seen_chars[char] = right
+#             current_lenght = right - left + 1
 
-            max_length = max(max_length, current_lenght)
-    return max_length
+#             max_length = max(max_length, current_lenght)
+#     return max_length
 
-print(longest_unique_substring("pwwkew"))   
+# print(longest_unique_substring("pwwkew"))   
+
+
+
+def is_palindrome(word):
+    return word == word[::-1] 
+
+print(is_palindrome("radar")) # Должно вернуть True (радар = радар)
+print(is_palindrome("level")) # Должно вернуть True (левел = левел)
+print(is_palindrome("apple")) # Должно вернуть False (аппле != елппа)
