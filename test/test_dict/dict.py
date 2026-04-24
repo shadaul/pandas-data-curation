@@ -283,18 +283,33 @@
 
 
 
-def find_missing(nums):
-    n = len(nums)
-    ideal_num = n * (n + 1) // 2
+# def find_missing(nums):
+#     n = len(nums)
+#     ideal_num = n * (n + 1) // 2
 
-    return ideal_num - sum(nums)
+#     return ideal_num - sum(nums)
 
 
-print(find_missing([3, 0, 1])) 
-# Должно вернуть 2. (Потому что массив длиной 3, значит числа должны быть 0, 1, 2, 3. Двойки не хватает).
+# print(find_missing([3, 0, 1])) 
+# # Должно вернуть 2. (Потому что массив длиной 3, значит числа должны быть 0, 1, 2, 3. Двойки не хватает).
 
-print(find_missing([0, 1, 2, 4, 5])) 
-# Должно вернуть 3.
+# print(find_missing([0, 1, 2, 4, 5])) 
+# # Должно вернуть 3.
 
-print(find_missing([1, 0])) 
-# Должно вернуть 2. (Массив длиной 2, числа должны быть 0, 1, 2. Двойки нет).
+# print(find_missing([1, 0])) 
+# # Должно вернуть 2. (Массив длиной 2, числа должны быть 0, 1, 2. Двойки нет).
+
+
+
+
+def find_single(nums):
+    ideal_sum = sum(set(nums)) * 2
+    sec_sum = sum(nums)
+    total = ideal_sum - sec_sum
+    return total
+
+print(find_single([2, 2, 1])) 
+# Должно вернуть 1 (Двойки — пара, единица — без пары).
+
+print(find_single([4, 1, 2, 1, 2])) 
+# Должно вернуть 4 (Единицы и двойки — пары, четверка — одна).

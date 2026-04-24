@@ -72,7 +72,16 @@
 -- GROUP by c.name
 -- HAVING sum(amount) > 5000
 
-SELECT DISTINCT amount
-FROM transfers
-ORDER BY amount DESC
-LIMIT 1 OFFSET 1;
+-- SELECT DISTINCT amount
+-- FROM transfers
+-- ORDER BY amount DESC
+-- LIMIT 1 OFFSET 1;
+
+
+SELECT transfer_id, amount,
+CASE 
+    when amount > 10000 then 'high'
+    when amount >= 1000 then 'medium'
+    else 'low'
+end as risk_level
+from transfers
