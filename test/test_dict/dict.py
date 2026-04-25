@@ -302,14 +302,54 @@
 
 
 
-def find_single(nums):
-    ideal_sum = sum(set(nums)) * 2
-    sec_sum = sum(nums)
-    total = ideal_sum - sec_sum
-    return total
+# def find_single(nums):
+#     ideal_sum = sum(set(nums)) * 2
+#     sec_sum = sum(nums)
+#     total = ideal_sum - sec_sum
+#     return total
 
-print(find_single([2, 2, 1])) 
-# Должно вернуть 1 (Двойки — пара, единица — без пары).
+# print(find_single([2, 2, 1])) 
+# # Должно вернуть 1 (Двойки — пара, единица — без пары).
 
-print(find_single([4, 1, 2, 1, 2])) 
-# Должно вернуть 4 (Единицы и двойки — пары, четверка — одна).
+# print(find_single([4, 1, 2, 1, 2])) 
+# # Должно вернуть 4 (Единицы и двойки — пары, четверка — одна).
+
+
+
+# def aggregate_transactions(logs):
+#     result = {}
+#     for item in logs:
+#         user = item["user_id"]
+#         money = item["amount"]
+#         result[user] = result.get(user, 0) + money
+#     return result
+
+# raw_logs = [
+#     {"user_id": 101, "amount": 1000},
+#     {"user_id": 102, "amount": 500},
+#     {"user_id": 101, "amount": 300},
+#     {"user_id": 103, "amount": 2000},
+#     {"user_id": 102, "amount": 100}
+# ]
+
+# print(aggregate_transactions(raw_logs))
+# # Должно вернуть: {101: 1300, 102: 600, 103: 2000}
+
+
+
+def find_pair(nums, target):
+    memory = {}
+    for index, num in enumerate(nums):
+        diff = target - num
+        if diff in memory:
+            return [memory[diff], index]
+        memory[num] = index
+
+
+
+# Транзакции: 2000, 7000, 11000, 15000. Ищем сумму 9000.
+print(find_pair([2000, 7000, 11000, 15000], 9000)) 
+# Должно вернуть: [0, 1] (т.к. 2000 + 7000 = 9000, а их индексы 0 и 1)
+
+print(find_pair([300, 200, 400], 600)) 
+# Должно вернуть: [1, 2] (т.к. 200 + 400 = 600)

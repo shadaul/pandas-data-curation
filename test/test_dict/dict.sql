@@ -78,10 +78,17 @@
 -- LIMIT 1 OFFSET 1;
 
 
-SELECT transfer_id, amount,
-CASE 
-    when amount > 10000 then 'high'
-    when amount >= 1000 then 'medium'
-    else 'low'
-end as risk_level
-from transfers
+-- SELECT transfer_id, amount,
+-- CASE 
+--     when amount > 10000 then 'high'
+--     when amount >= 1000 then 'medium'
+--     else 'low'
+-- end as risk_level
+-- from transfers
+
+SELECT d.city_name, sum(f.amount) as total_amount
+from fact_transactions f JOIN dim_cities d on f.city_id = d.city_id
+where country_name = 'Switzerland'
+GROUP by d.city_name
+order by total_amountamount DESC
+LIMIT 1
