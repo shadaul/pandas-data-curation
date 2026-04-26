@@ -86,9 +86,24 @@
 -- end as risk_level
 -- from transfers
 
-SELECT d.city_name, sum(f.amount) as total_amount
-from fact_transactions f JOIN dim_cities d on f.city_id = d.city_id
-where country_name = 'Switzerland'
-GROUP by d.city_name
-order by total_amountamount DESC
-LIMIT 1
+-- SELECT d.city_name, sum(f.amount) as total_amount
+-- from fact_transactions f JOIN dim_cities d on f.city_id = d.city_id
+-- where country_name = 'Switzerland'
+-- GROUP by d.city_name
+-- order by total_amountamount DESC
+-- LIMIT 1
+
+
+-- WITH cte as (
+--     SELECT client_id, amount,
+--     dense_rank () OVER (PARTITION by client_id order by amount DESC) as rank
+--     from transactions
+-- )
+-- SELECT client_id, amount, rank
+-- from cte
+-- where rank <=2
+
+
+SELECT client_id, pay_date, amount,
+LAG(amount) over (PARTITION by client_id order by pay_date) as prev_amount
+from payments
