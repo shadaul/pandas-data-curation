@@ -357,18 +357,18 @@
 
 
 
-def top_frequent(nums, k):
-    counts = {}
-    for num in nums:
-        if num not in counts:
-            counts[num] = counts.get(num, 0) + 1
-    sorted_keys = sorted(counts, key=counts.get, reverse=True)
-    return sorted_keys[:k]
+# def top_frequent(nums, k):
+#     counts = {}
+#     for num in nums:
+#         if num not in counts:
+#             counts[num] = counts.get(num, 0) + 1
+#     sorted_keys = sorted(counts, key=counts.get, reverse=True)
+#     return sorted_keys[:k]
 
-# Ищем топ-2 самые частые суммы
-print(top_frequent([100, 100, 100, 500, 500, 200], 2)) 
-# Должно вернуть: [100, 500] 
-# (потому что 100 встречается 3 раза, 500 — 2 раза, а 200 — всего 1 раз).
+# # Ищем топ-2 самые частые суммы
+# print(top_frequent([100, 100, 100, 500, 500, 200], 2)) 
+# # Должно вернуть: [100, 500] 
+# # (потому что 100 встречается 3 раза, 500 — 2 раза, а 200 — всего 1 раз).
 
-print(top_frequent([50, 50, 10, 10, 10, 30], 1)) 
-# Должно вернуть: [10] (так как десятка встречается чаще всех).
+# print(top_frequent([50, 50, 10, 10, 10, 30], 1)) 
+# # Должно вернуть: [10] (так как десятка встречается чаще всех).
