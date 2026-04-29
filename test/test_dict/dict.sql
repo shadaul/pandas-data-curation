@@ -104,6 +104,17 @@
 -- where rank <=2
 
 
-SELECT client_id, pay_date, amount,
-LAG(amount) over (PARTITION by client_id order by pay_date) as prev_amount
-from payments
+-- SELECT client_id, pay_date, amount,
+-- LAG(amount) over (PARTITION by client_id order by pay_date) as prev_amount
+-- from payments
+
+
+SELECT user_id, amount, operation_date
+from card_payments
+where operation_date like '2026-03-%'
+
+UNION ALL
+
+SELECT user_id, amount, operation_date
+from crypto_transfers
+where operation_date like '2026-03-%'

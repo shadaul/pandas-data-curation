@@ -372,3 +372,14 @@
 
 # print(top_frequent([50, 50, 10, 10, 10, 30], 1)) 
 # # Должно вернуть: [10] (так как десятка встречается чаще всех).
+
+def clean_logs(logs):
+    correct = []
+    for item in logs:
+        
+        if item >= 0:
+            correct.append(item)
+        
+    return correct
+    
+print(clean_logs([1500, -200, 5000, -10, 300]))
