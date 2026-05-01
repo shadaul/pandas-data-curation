@@ -373,13 +373,79 @@
 # print(top_frequent([50, 50, 10, 10, 10, 30], 1)) 
 # # Должно вернуть: [10] (так как десятка встречается чаще всех).
 
-def clean_logs(logs):
-    correct = []
-    for item in logs:
+# def clean_logs(logs):
+#     correct = []
+#     for item in logs:
         
-        if item >= 0:
-            correct.append(item)
+#         if item >= 0:
+#             correct.append(item)
         
-    return correct
+#     return correct
     
-print(clean_logs([1500, -200, 5000, -10, 300]))
+# print(clean_logs([1500, -200, 5000, -10, 300]))
+
+# raw_logs = [
+#     {"player_id": 101, "playtime": 150, "status": "active"},
+#     {"player_id": 102, "playtime": -20, "status": "active"},  # Баг: отрицательное время
+#     {"player_id": 103, "playtime": 300, "status": ""},        # Баг: пустой статус
+#     {"player_id": 104, "playtime": 45,  "status": "banned"},
+#     {"player_id": 105, "playtime": 0,   "status": "active"}   # Нулевое время тоже убираем
+# ]
+
+
+# def clean_game_logs(logs):
+#     clean = []
+#     for item in logs:
+#         time = item['playtime']
+#         status = item['status']
+#         if time > 0 and status != "":
+#             clean.append(item)
+#     return clean
+
+# print(clean_game_logs(raw_logs))
+
+# import pandas as pd
+
+# # Сырые данные покупок во внутриигровом магазине
+# data = {
+#     'player_id': [101, 102, 103, 104, 105],
+#     'item': ['Sword', 'Shield', 'Axe', 'Potion', 'Bow'],
+#     'coins_spent': [250, -50, 300, 0, 150],  # Баги: отрицательные и нулевые траты
+#     'transaction_status': ['success', 'success', 'failed', 'success', 'error']
+# }
+
+# df = pd.DataFrame(data)
+
+# clean_df = df[(df['coins_spent'] > 0) & (df['transaction_status'] == 'success')]
+# print("Исходный DataFrame:\n", clean_df, "\n")
+
+
+# import pandas as pd
+
+# data = {
+#     'player_id': [1, 2, 3, 4, 5],
+#     'item_used': ['Health Potion', 'Aimbot', 'Sword', 'Wallhack', 'Shield']
+# }
+# df = pd.DataFrame(data)
+
+# # Список запрещенных предметов
+# banned_items = ['Aimbot', 'Wallhack']
+
+# cheaters_df = df[df['item_used'].isin(banned_items)]
+# print(cheaters_df)
+
+import pandas as pd
+import numpy as np  # Импортируем библиотеку NumPy, чтобы использовать np.nan (пустоту)
+
+# Сырые данные с "дырами"
+data = {
+    'player_id': [101, 102, 103, 104, 105],
+    'experience': [1500, np.nan, 3200, np.nan, 4100],  # np.nan - это системная пустота
+    'status': ['active', 'banned', np.nan, 'active', 'active']
+}
+df = pd.DataFrame(data)
+
+df['experience'] = df['experience'].fillna(0)
+clean_df = df.dropna(subset=['status'])
+
+print("Сырые данные:\n", clean_df, "\n")
