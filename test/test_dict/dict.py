@@ -434,18 +434,56 @@
 # cheaters_df = df[df['item_used'].isin(banned_items)]
 # print(cheaters_df)
 
+# import pandas as pd
+# import numpy as np  # Импортируем библиотеку NumPy, чтобы использовать np.nan (пустоту)
+
+# # Сырые данные с "дырами"
+# data = {
+#     'player_id': [101, 102, 103, 104, 105],
+#     'experience': [1500, np.nan, 3200, np.nan, 4100],  # np.nan - это системная пустота
+#     'status': ['active', 'banned', np.nan, 'active', 'active']
+# }
+# df = pd.DataFrame(data)
+
+# df['experience'] = df['experience'].fillna(0)
+# clean_df = df.dropna(subset=['status'])
+
+# print("Сырые данные:\n", clean_df, "\n")
+
+# import pandas as pd
+
+# data = {
+#     'player_id': [1, 2, 3, 4, 5, 6],
+#     'item_category': ['Weapon', 'Armor', 'Weapon', 'Potion', 'Armor', 'Weapon'],
+#     'price': [150, 300, 200, 50, 400, 100]
+# }
+# df = pd.DataFrame(data)
+
+
+# revenue_df = df.groupby('item_category')['price'].sum()
+
+# # Выводим результат
+# print("Выручка по категориям:\n", revenue_df)
+
+
 import pandas as pd
-import numpy as np  # Импортируем библиотеку NumPy, чтобы использовать np.nan (пустоту)
 
-# Сырые данные с "дырами"
-data = {
-    'player_id': [101, 102, 103, 104, 105],
-    'experience': [1500, np.nan, 3200, np.nan, 4100],  # np.nan - это системная пустота
-    'status': ['active', 'banned', np.nan, 'active', 'active']
+# Таблица 1: Профили игроков
+users_data = {
+    'player_id': [101, 102, 103],
+    'nickname': ['ShadowNinja', 'GamerPro', 'NoobMaster']
 }
-df = pd.DataFrame(data)
+users_df = pd.DataFrame(users_data)
 
-df['experience'] = df['experience'].fillna(0)
-clean_df = df.dropna(subset=['status'])
+# Таблица 2: Транзакции
+purchases_data = {
+    'transaction_id': [991, 992, 993, 994],
+    'player_id': [101, 103, 101, 102],
+    'amount_spent': [500, 150, 1000, 300]
+}
+purchases_df = pd.DataFrame(purchases_data)
 
-print("Сырые данные:\n", clean_df, "\n")
+# Твоя задача: объединить users_df и purchases_df
+full_data = pd.merge(users_df, purchases_df, on='player_id', how='inner')
+
+print(full_data)
